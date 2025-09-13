@@ -1,0 +1,82 @@
+!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Smart Campus Assistant</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 750px; margin: 2rem auto; background: #f5f5f5; }
+    .card { border: 1px solid #ccc; border-radius: 8px; padding: 1.5rem; background: white; }
+    h2 { text-align: center; margin-bottom: 1rem; }
+    label { display: block; margin-top: 1rem; font-weight: bold; }
+    select, textarea, button {
+      width: 100%; padding: 8px; margin-top: 6px;
+      border-radius: 4px; border: 1px solid #aaa;
+      font-size: 14px;
+    }
+    button { background-color: #007BFF; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #0056b3; }
+    #output { margin-top: 1.5rem; padding: 1rem; border: 1px solid #ccc;
+              border-radius: 8px; background: #f9f9f9; white-space: pre-line; min-height: 80px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>📚 Smart Campus Assistant</h2>
+
+    <label for="queryType">Choose a category:</label>
+    <select id="queryType">
+      <option value="schedule">Class Schedule</option>
+      <option value="dining">Dining / Mess</option>
+      <option value="library">Library</option>
+      <option value="hostel">Hostel</option>
+      <option value="transport">Transport</option>
+      <option value="exams">Exams</option>
+      <option value="placements">Placements</option>
+      <option value="health">Health Center</option>
+      <option value="sports">Sports</option>
+      <option value="it">IT Helpdesk</option>
+      <option value="events">Events</option>
+      <option value="admin">Administration</option>
+    </select>
+
+    <label for="question">Or write your question:</label>
+    <textarea id="question" rows="3" placeholder="Type your question here..."></textarea>
+
+    <button id="answerBtn">Get Answer</button>
+
+    <div id="output">💡 Your answer will appear here...</div>
+  </div>
+
+  <script>
+    // Knowledge base for all categories
+    const kb = {
+      schedule: "Classes run Mon–Fri, 9 AM – 5 PM. Labs are in the afternoon. Check your department notice board for detailed timetable.",
+      dining: "Mess Menu:\n- Breakfast: 7:30–9:00 AM\n- Lunch: 12:30–2:00 PM\n- Dinner: 7:30–9:30 PM\nSpecial today: Paneer Butter Masala 🍴",
+      library: "Library hours:\n- Weekdays: 8 AM – 10 PM\n- Weekends: 9 AM – 6 PM\nDigital e-library accessible via student portal.",
+      hostel: "Hostel Rules:\n- Gate closes at 10 PM\n- Wi-Fi 24/7\n- Visitors allowed till 8 PM\n- Warden office open 6–8 PM daily",
+      transport: "Campus buses run every 30 minutes from 6 AM – 9 PM. Shuttle service available for hostels. Main city transport nearby.",
+      exams: "Mid-semester exams: Oct 5–12. End-semester exams: Dec 1–15. Admit cards available on student portal 1 week before exams.",
+      placements: "Placement cell located on 2nd floor, Admin Block. Companies visiting: Infosys, TCS, Wipro, Accenture, Amazon.",
+      health: "Health center:\n- OPD: 9 AM – 5 PM\n- 24/7 emergency care\n- Ambulance at Gate 2\n- Call: +91-1234567890",
+      sports: "Sports Complex:\n- Open 4 PM – 9 PM daily\n- Facilities: Cricket, Football, Basketball, Gym\n- Annual Sports Meet in February",
+      it: "IT Helpdesk:\n- Location: Lab 101\n- Hours: 10 AM – 5 PM\n- Email: it-support@university.edu\n- Services: Wi-Fi, email, portal issues",
+      events: "Upcoming Events:\n- Cultural Fest: Oct 15 🎭\n- Tech Symposium: Nov 10 💻\n- Alumni Meet: Dec 5 🤝",
+      admin: "Admin Office:\n- Hours: 10 AM – 4 PM (Mon–Fri)\n- Services: Certificates, Fee receipts, ID cards\n- Email: admin@university.edu"
+    };
+
+    // Button click event
+    document.getElementById("answerBtn").onclick = function() {
+      const type = document.getElementById("queryType").value;
+      const question = document.getElementById("question").value.trim();
+
+      let answer = kb[type] || "Sorry, I don’t have information about that yet.";
+
+      if (question) {
+        answer = `You asked: "${question}"\n\n${answer}`;
+      }
+
+      document.getElementById("output").innerText = answer;
+    };
+  </script>
+</body>
+</html>
